@@ -1,0 +1,65 @@
+<!--
+1 - Preencher o tabuleiro com 9 quadrados
+2 - Ao clicar no quadrado, adcionar/remover a classe ativo
+    Isso fará com que a cor do quadrado seja alterada
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Exercício 1</title>
+</head>
+<body ng-app="quadrados">
+    <style>
+        .tabuleiro{
+            width: 150px;
+            height: 20px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .square{
+            width: 48px;
+            height: 48px;
+            border: 1px solid black;
+        }
+
+        .square.ativo{
+            background-color: rgb(172, 239, 216);
+        }
+    </style>
+
+    <section class="tabuleiro" ng-controller="QuadradosController">
+        <div class="square"
+            ng-repeat="quadrado in quadrados"
+            ng-click="ativar(quadrado)"
+            ng-class="{'ativo': quadrado.status == true}">{{ quadrado.id }}</div>
+    </section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+    <script>
+        const app = angular.module('quadrados', []);
+
+        app.controller('QuadradosController', ($scope) => {
+            $scope.quadrados = [
+                {id: 1, status: false},
+                {id: 2, status: false},
+                {id: 3, status: false},
+                {id: 4, status: false},
+                {id: 5, status: false},
+                {id: 6, status: false},
+                {id: 7, status: false},
+                {id: 8, status: false},
+                {id: 9, status: false}
+            ];
+            
+            $scope.ativar = (quadrado) => {
+                quadrado.status = !quadrado.status;                              
+            }
+        });
+    </script>
+</body>
+</html>
